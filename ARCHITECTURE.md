@@ -11,9 +11,11 @@ framework with human-reviewed changes.
   and shared utilities
 - `src/framework`: reusable framework-facing contracts and extension points
 - `src/pages/base`: current base Playwright page abstraction used by samples
+- `src/framework/api`: reusable API client and assertion primitives
 - `src/samples/training-app`: sample implementation that demonstrates how an
   app branch can consume the framework
 - `tests/bdd`: business-facing BDD artifacts and generated reviewable output
+- `tests/api`: HTTP and API-facing coverage
 - `tests/smoke`: executable smoke coverage for the sample app
 
 ## Design Rules

@@ -24,4 +24,8 @@ export class DashboardPage extends BasePage {
     await expect(this.dashboardNav).toBeVisible();
     await expect(this.workspaceWidgetsHeading).toBeVisible();
   }
+
+  async assertNotLoaded(): Promise<void> {
+    await expect(this.workspaceWidgetsHeading).not.toBeVisible();
+  }
 }

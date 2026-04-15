@@ -95,12 +95,12 @@ export const loginSelectors = {
 
   otpInput: {
     friendlyName: 'One-time code input',
-    preferred: { type: 'label', value: /one-time code/i },
+    preferred: { type: 'label', value: /one-time code|verification code/i },
     fallbacks: [
       { type: 'css', value: 'form input[maxlength="6"]' },
       {
         type: 'xpath',
-        value: "//label[contains(translate(normalize-space(.), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'one-time code')]/following::input[@maxlength='6'][1]",
+        value: "//label[contains(translate(normalize-space(.), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'one-time code') or contains(translate(normalize-space(.), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'verification code')]/following::input[@maxlength='6'][1]",
       },
     ],
   },

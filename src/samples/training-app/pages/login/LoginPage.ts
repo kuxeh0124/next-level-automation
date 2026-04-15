@@ -73,6 +73,12 @@ export class LoginPage extends BasePage {
         await this.verifyButton.click();
     }
 
+    async assertMfaChallengeStillVisible(): Promise<void> {
+        await expect(this.mfaHeading).toBeVisible();
+        await expect(this.otpInput).toBeVisible();
+        await expect(this.verifyButton).toBeVisible();
+    }
+
     async completeMfa(): Promise<void> {
         await this.waitForMfaChallenge();
         const code = await this.getCurrentAuthenticatorCode();
