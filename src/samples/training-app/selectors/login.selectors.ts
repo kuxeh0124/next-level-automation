@@ -1,4 +1,4 @@
-import type { SelectorDefinition } from './selector.types';
+import type { SelectorDefinition } from '@selectors/selector.types';
 
 export const loginSelectors = {
   usernameInput: {

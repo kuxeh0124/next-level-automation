@@ -8,6 +8,7 @@
 
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "ignoreDeprecations": "6.0",
 
     "strict": true,
     "skipLibCheck": true,
@@ -16,11 +17,14 @@
 
     "baseUrl": ".",
     "paths": {
+      "@bdd/*": ["src/core/bdd/*"],
       "@core/*": ["src/core/*"],
       "@data/*": ["src/data/*"],
       "@fixtures/*": ["src/fixtures/*"],
       "@flows/*": ["src/flows/*"],
+      "@framework/*": ["src/framework/*"],
       "@pages/*": ["src/pages/*"],
+      "@samples/*": ["src/samples/*"],
       "@components/*": ["src/components/*"],
       "@selectors/*": ["src/selectors/*"],
       "@services/*": ["src/services/*"],

@@ -1,0 +1,22 @@
+export type ReuseArtifactType =
+  | 'feature'
+  | 'step-definition'
+  | 'flow'
+  | 'page'
+  | 'selector'
+  | 'assertion';
+
+export interface ReuseArtifact {
+  type: ReuseArtifactType;
+  name: string;
+  path: string;
+  summary: string;
+  tags?: string[];
+}
+
+export interface ReuseSearchResult {
+  query: string;
+  exactMatches: ReuseArtifact[];
+  relatedMatches: ReuseArtifact[];
+  gaps: string[];
+}
