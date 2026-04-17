@@ -15,23 +15,34 @@ export class LoginFlow {
         this.dashboardPage = new DashboardPage(page);
     }
 
-    async loginAsAStandardUser(artifacts?: TestArtifacts): Promise<void> {
+    async goToLoginPage(artifacts?: TestArtifacts): Promise<void> {
         await this.loginPage.navigate('/login');
         await artifacts?.captureCheckpoint('login-page-loaded', this.page);
+    }
+
+    async signInAsStandardUser(artifacts?: TestArtifacts): Promise<void> {
         await this.loginPage.login("trainer@example.com", "Password123!");
         await this.loginPage.waitForMfaChallenge();
         await artifacts?.captureCheckpoint('mfa-challenge-visible', this.page);
         const code = await this.loginPage.getCurrentAuthenticatorCode();
         await this.loginPage.enterOneTimeCode(code);
         await this.loginPage.clickVerify();
+    }
+
+    async assertDashboardLoaded(artifacts?: TestArtifacts): Promise<void> {
         await this.dashboardPage.assertLoaded();
         await artifacts?.captureCheckpoint('dashboard-loaded', this.page);
+    }
+
+    async loginAsAStandardUser(artifacts?: TestArtifacts): Promise<void> {
+        await this.goToLoginPage(artifacts);
+        await this.signInAsStandardUser(artifacts);
+        await this.assertDashboardLoaded(artifacts);
         Logger.success('Standard user login flow completed successfully');
     }
 
     async rejectInvalidMfaCode(artifacts?: TestArtifacts): Promise<void> {
-        await this.loginPage.navigate('/login');
-        await artifacts?.captureCheckpoint('login-page-loaded', this.page);
+        await this.goToLoginPage(artifacts);
         await this.loginPage.login("trainer@example.com", "Password123!");
         await this.loginPage.waitForMfaChallenge();
         await artifacts?.captureCheckpoint('mfa-challenge-visible', this.page);

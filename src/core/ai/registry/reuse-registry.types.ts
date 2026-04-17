@@ -3,7 +3,9 @@ export type ReuseArtifactType =
   | 'step-definition'
   | 'flow'
   | 'page'
+  | 'component'
   | 'selector'
+  | 'api-client'
   | 'assertion';
 
 export interface ReuseArtifact {

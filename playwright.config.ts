@@ -1,7 +1,16 @@
 import {defineConfig} from '@playwright/test';
+import {defineBddConfig} from 'playwright-bdd';
+
+const bddTestDir = defineBddConfig({
+    features: 'tests/bdd/features/**/*.feature',
+    steps: [
+        'tests/bdd/step-definitions/**/*.ts',
+        'src/fixtures/test.fixture.ts',
+    ],
+    outputDir: '.features-gen',
+});
 
 export default defineConfig({
-    testDir: './tests',
     timeout: 30 * 1000,
     expect: {
         timeout: 5000
@@ -16,4 +25,15 @@ export default defineConfig({
         trace: 'retain-on-failure', 
         viewport: {width: 1440, height: 900},
     },
+    projects: [
+        {
+            name: 'core',
+            testDir: './tests',
+            testIgnore: 'tests/bdd/**/*',
+        },
+        {
+            name: 'bdd',
+            testDir: bddTestDir,
+        },
+    ],
 });

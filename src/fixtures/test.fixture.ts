@@ -1,4 +1,5 @@
-import { expect, test as base, type Page, type TestInfo } from '@playwright/test';
+import { test as base } from 'playwright-bdd';
+import { expect, type Page, type TestInfo } from '@playwright/test';
 import { Logger } from '@core/logger/logger';
 import type { TestArtifacts } from '@support/artifacts/artifact.types';
 

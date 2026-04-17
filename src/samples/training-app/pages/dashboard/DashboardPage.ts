@@ -1,31 +1,24 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { BasePage } from '@pages/base/base.page';
-import { dashboardSelectors } from '@samples/training-app/selectors/dashboard.selectors';
+import { DashboardNav } from '@samples/training-app/pages/dashboard/components/DashboardNav';
+import { WorkspaceWidgets } from '@samples/training-app/pages/dashboard/components/WorkspaceWidgets';
 
 export class DashboardPage extends BasePage {
+  readonly nav: DashboardNav;
+  readonly widgets: WorkspaceWidgets;
+
   constructor(page: Page) {
     super(page);
-  }
-
-  get appName(): Locator {
-    return this.resolve(dashboardSelectors.appName);
-  }
-
-  get dashboardNav(): Locator {
-    return this.resolve(dashboardSelectors.dashboardNav);
-  }
-
-  get workspaceWidgetsHeading(): Locator {
-    return this.resolve(dashboardSelectors.workspaceWidgetsHeading);
+    this.nav = new DashboardNav(page);
+    this.widgets = new WorkspaceWidgets(page);
   }
 
   async assertLoaded(): Promise<void> {
-    await expect(this.appName).toContainText('TrainFlow');
-    await expect(this.dashboardNav).toBeVisible();
-    await expect(this.workspaceWidgetsHeading).toBeVisible();
+    await this.nav.assertVisible();
+    await this.widgets.assertVisible();
   }
 
   async assertNotLoaded(): Promise<void> {
-    await expect(this.workspaceWidgetsHeading).not.toBeVisible();
+    await this.widgets.assertNotVisible();
   }
 }
