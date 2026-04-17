@@ -1,11 +1,17 @@
 # Next Level Automation
 
+Created by Karl Jon Cantor.
+
 This repository is the foundation for an AI-assisted automation framework with:
 
 - Playwright UI automation
 - HTTP/API testing capability
 - BDD-oriented scaffolding
 - a reusable framework core plus a clearly separated training-app sample
+
+The training-app sample is intentionally kept in the repository as a reference
+implementation and template for future projects where this framework will be
+deployed.
 
 ## Current Layout
 

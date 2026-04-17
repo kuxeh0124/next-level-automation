@@ -1,9 +1,15 @@
 # Architecture
 
+Created by Karl Jon Cantor.
+
 ## Intent
 
 This repository is designed to evolve into an AI-assisted BDD automation
 framework with human-reviewed changes.
+
+The training-app sample is intentionally preserved as a reusable reference
+implementation so the framework can be lifted into future projects without
+losing a working example of the intended structure and patterns.
 
 ## Structure
 
