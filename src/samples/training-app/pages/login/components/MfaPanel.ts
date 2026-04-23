@@ -31,7 +31,7 @@ export class MfaPanel extends BasePage {
   }
 
   async getCurrentAuthenticatorCode(): Promise<string> {
-    const code = (await this.tokenCode.innerText()).trim();
+    const code = (await this.tokenCode.innerText()).replace(/\D/g, '');
     Logger.action(`Resolved current authenticator code: ${'*'.repeat(code.length)}`);
     return code;
   }

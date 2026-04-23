@@ -2,6 +2,8 @@ import { test as base } from 'playwright-bdd';
 import { expect, type Page, type TestInfo } from '@playwright/test';
 import { Logger } from '@core/logger/logger';
 import type { TestArtifacts } from '@support/artifacts/artifact.types';
+import { InMemoryRuntimeDataStore } from '@support/runtime-data/runtime-data.store';
+import type { RuntimeDataStore } from '@support/runtime-data/runtime-data.types';
 
 const sanitizeFileName = (value: string): string =>
   value
@@ -26,7 +28,11 @@ const attachCheckpoint = async (
   Logger.info(`Captured checkpoint screenshot: ${name}`);
 };
 
-export const test = base.extend<{ artifacts: TestArtifacts; _frameworkLogging: void }>({
+export const test = base.extend<{
+  artifacts: TestArtifacts;
+  runtimeData: RuntimeDataStore;
+  _frameworkLogging: void;
+}>({
   _frameworkLogging: [
     async ({}, use: () => Promise<void>, testInfo: TestInfo) => {
       Logger.startTest(testInfo);
@@ -53,6 +59,14 @@ export const test = base.extend<{ artifacts: TestArtifacts; _frameworkLogging: v
     };
 
     await use(artifacts);
+  },
+
+  runtimeData: async ({}, use: (runtimeData: RuntimeDataStore) => Promise<void>) => {
+    const runtimeData = new InMemoryRuntimeDataStore();
+
+    await use(runtimeData);
+
+    runtimeData.clear();
   },
 });
 

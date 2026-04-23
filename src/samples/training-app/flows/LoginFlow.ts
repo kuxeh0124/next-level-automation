@@ -3,6 +3,11 @@ import { DashboardPage } from "@samples/training-app/pages/dashboard/DashboardPa
 import { LoginPage } from "@samples/training-app/pages/login/LoginPage";
 import { Logger } from "@core/logger/logger";
 import type { TestArtifacts } from "@support/artifacts/artifact.types";
+import {
+    authScenarioData,
+    trainingAppPersonas,
+    type TrainingAppPersona,
+} from "@samples/training-app/data";
 
 export class LoginFlow {
     private readonly page: Page;
@@ -20,13 +25,17 @@ export class LoginFlow {
         await artifacts?.captureCheckpoint('login-page-loaded', this.page);
     }
 
-    async signInAsStandardUser(artifacts?: TestArtifacts): Promise<void> {
-        await this.loginPage.login("trainer@example.com", "Password123!");
+    async signIn(persona: TrainingAppPersona, artifacts?: TestArtifacts): Promise<void> {
+        await this.loginPage.login(persona.credentials.username, persona.credentials.password);
         await this.loginPage.waitForMfaChallenge();
         await artifacts?.captureCheckpoint('mfa-challenge-visible', this.page);
         const code = await this.loginPage.getCurrentAuthenticatorCode();
         await this.loginPage.enterOneTimeCode(code);
         await this.loginPage.clickVerify();
+    }
+
+    async signInAsStandardUser(artifacts?: TestArtifacts): Promise<void> {
+        await this.signIn(trainingAppPersonas.standardUser, artifacts);
     }
 
     async assertDashboardLoaded(artifacts?: TestArtifacts): Promise<void> {
@@ -43,10 +52,13 @@ export class LoginFlow {
 
     async rejectInvalidMfaCode(artifacts?: TestArtifacts): Promise<void> {
         await this.goToLoginPage(artifacts);
-        await this.loginPage.login("trainer@example.com", "Password123!");
+        await this.loginPage.login(
+            trainingAppPersonas.standardUser.credentials.username,
+            trainingAppPersonas.standardUser.credentials.password
+        );
         await this.loginPage.waitForMfaChallenge();
         await artifacts?.captureCheckpoint('mfa-challenge-visible', this.page);
-        await this.loginPage.enterOneTimeCode('000000');
+        await this.loginPage.enterOneTimeCode(authScenarioData.invalidMfaCode);
         await this.loginPage.clickVerify();
         await this.loginPage.assertMfaChallengeStillVisible();
         await this.dashboardPage.assertNotLoaded();

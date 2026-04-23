@@ -19,6 +19,9 @@ deployed.
 - `src/framework`: reusable framework-facing API and extension points
 - `src/pages/base`: current shared Playwright base page abstraction
 - `src/samples/training-app`: sample app pages, flows, selectors, and API client
+- `src/samples/training-app/data`: sample personas, scenario data, form data,
+  and data builder structure
+- `src/support/runtime-data`: test-scoped runtime data storage
 - `tests/smoke`: executable UI smoke coverage for the training app
 - `tests/api`: HTTP/API coverage for the training app sample
 - `tests/bdd`: future BDD-facing artifacts and generated output
