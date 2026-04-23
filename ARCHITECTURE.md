@@ -15,6 +15,7 @@ losing a working example of the intended structure and patterns.
 
 - `src/core`: framework-level capabilities such as AI, BDD, logging, config,
   and shared utilities
+- `src/core/config`: environment-aware runtime configuration
 - `src/framework`: reusable framework-facing contracts and extension points
 - `src/pages/base`: current base Playwright page abstraction used by samples
 - `src/framework/api`: reusable API client and assertion primitives

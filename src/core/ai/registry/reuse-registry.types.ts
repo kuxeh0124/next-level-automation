@@ -9,6 +9,7 @@ export type ReuseArtifactType =
   | 'assertion';
 
 export interface ReuseArtifact {
+  id: string;
   type: ReuseArtifactType;
   name: string;
   path: string;

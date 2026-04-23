@@ -1,0 +1,17 @@
+{
+  "standardUserLogin": {
+    "username": "trainer@example.com",
+    "password": "Password123!",
+    "rememberMe": false
+  },
+  "unknownUserLogin": {
+    "username": "unknown@example.com",
+    "password": "Password123!",
+    "rememberMe": false
+  },
+  "emptyUsernameLogin": {
+    "username": "",
+    "password": "Password123!",
+    "rememberMe": false
+  }
+}

@@ -175,6 +175,12 @@ Examples:
 - flow assertion if the workflow contract includes success/failure completion
 - test assertion if the expectation is scenario-specific and not broadly reusable
 
+Prefer reusable helpers from `src/framework/assertions` for common technical
+checks, then wrap them in page/component methods with business-readable names.
+
+Avoid raw locator expectations in BDD steps unless the assertion is unique to
+that scenario.
+
 ## Data Rules
 
 Test data should move toward dedicated sample data or config modules.
@@ -230,7 +236,7 @@ AI must generate into the framework shape, not around it.
 
 Required order:
 
-1. check registry for reuse
+1. check `src/core/ai/registry/reuse-registry.ts` for reuse
 2. explore if necessary
 3. propose structured changes
 4. require human review

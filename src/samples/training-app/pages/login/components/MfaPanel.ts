@@ -1,6 +1,7 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { BasePage } from '@pages/base/base.page';
 import { Logger } from '@core/logger/logger';
+import { expectAllVisible } from '@framework/assertions/ui.assertions';
 import { mfaPanelSelectors } from '@samples/training-app/selectors/login/mfa-panel.selectors';
 
 export class MfaPanel extends BasePage {
@@ -26,8 +27,7 @@ export class MfaPanel extends BasePage {
 
   async waitForChallenge(): Promise<void> {
     Logger.action('Waiting for MFA challenge');
-    await expect(this.mfaHeading).toBeVisible();
-    await expect(this.verifyButton).toBeVisible();
+    await expectAllVisible([this.mfaHeading, this.verifyButton]);
   }
 
   async getCurrentAuthenticatorCode(): Promise<string> {
@@ -47,9 +47,7 @@ export class MfaPanel extends BasePage {
   }
 
   async assertStillVisible(): Promise<void> {
-    await expect(this.mfaHeading).toBeVisible();
-    await expect(this.otpInput).toBeVisible();
-    await expect(this.verifyButton).toBeVisible();
+    await expectAllVisible([this.mfaHeading, this.otpInput, this.verifyButton]);
   }
 
   async completeUsingDisplayedCode(): Promise<void> {

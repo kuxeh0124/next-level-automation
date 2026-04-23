@@ -1,5 +1,7 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { BasePage } from '@pages/base/base.page';
+import { expectContainsText, expectVisible } from '@framework/assertions/ui.assertions';
+import { dashboardScenarioData } from '@samples/training-app/data';
 import { dashboardNavSelectors } from '@samples/training-app/selectors/dashboard/dashboard-nav.selectors';
 
 export class DashboardNav extends BasePage {
@@ -16,7 +18,7 @@ export class DashboardNav extends BasePage {
   }
 
   async assertVisible(): Promise<void> {
-    await expect(this.appName).toContainText('TrainFlow');
-    await expect(this.dashboardButton).toBeVisible();
+    await expectContainsText(this.appName, dashboardScenarioData.expectedAppName);
+    await expectVisible(this.dashboardButton);
   }
 }

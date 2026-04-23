@@ -13,3 +13,11 @@ export const trainingAppPersonas = {
 } satisfies Record<string, TrainingAppPersona>;
 
 export type TrainingAppPersonaKey = keyof typeof trainingAppPersonas;
+
+export const getTrainingAppPersona = (personaKey: string): TrainingAppPersona => {
+  if (personaKey in trainingAppPersonas) {
+    return trainingAppPersonas[personaKey as TrainingAppPersonaKey];
+  }
+
+  throw new Error(`Training app persona not found: ${personaKey}`);
+};

@@ -1,5 +1,6 @@
 import {defineConfig} from '@playwright/test';
 import {defineBddConfig} from 'playwright-bdd';
+import {runtimeConfig} from '@core/config/runtime.config';
 
 const bddTestDir = defineBddConfig({
     features: 'tests/bdd/features/**/*.feature',
@@ -11,15 +12,15 @@ const bddTestDir = defineBddConfig({
 });
 
 export default defineConfig({
-    timeout: 30 * 1000,
+    timeout: runtimeConfig.actionTimeoutMs,
     expect: {
-        timeout: 5000
+        timeout: runtimeConfig.expectTimeoutMs
     },
-    retries: 0,
+    retries: runtimeConfig.retries,
     reporter: [['list'], ['html', {open: 'never'}]],
     use: {
-        baseURL: process.env.BASE_URL || 'http://localhost:5173',
-        headless: false,
+        baseURL: runtimeConfig.baseUrl,
+        headless: runtimeConfig.headless,
         screenshot: 'only-on-failure',
         video: 'retain-on-failure',
         trace: 'retain-on-failure', 

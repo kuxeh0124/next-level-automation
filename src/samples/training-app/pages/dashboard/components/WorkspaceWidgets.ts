@@ -1,5 +1,6 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { BasePage } from '@pages/base/base.page';
+import { expectNotVisible, expectVisible } from '@framework/assertions/ui.assertions';
 import { workspaceWidgetsSelectors } from '@samples/training-app/selectors/dashboard/workspace-widgets.selectors';
 
 export class WorkspaceWidgets extends BasePage {
@@ -12,10 +13,10 @@ export class WorkspaceWidgets extends BasePage {
   }
 
   async assertVisible(): Promise<void> {
-    await expect(this.heading).toBeVisible();
+    await expectVisible(this.heading);
   }
 
   async assertNotVisible(): Promise<void> {
-    await expect(this.heading).not.toBeVisible();
+    await expectNotVisible(this.heading);
   }
 }

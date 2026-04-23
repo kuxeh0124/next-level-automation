@@ -32,8 +32,28 @@ deployed.
 - `npm run test`: run the full Playwright suite
 - `npm run test:smoke`: run UI smoke tests
 - `npm run test:api`: run API/HTTP tests
+- `npm run test:bdd`: run generated BDD tests
 - `npm run test:all`: run the full Playwright suite
 - `npm run report`: open the latest Playwright HTML report
+
+## Runtime Configuration
+
+The framework reads runtime settings from environment variables:
+
+- `BASE_URL`: app URL, defaults to `http://localhost:5173`
+- `TEST_ENV`: environment label, defaults to `local`
+- `CI`: when true, enables CI-friendly defaults
+- `HEADLESS`: overrides browser headless mode
+- `RETRIES`: overrides retry count
+- `ACTION_TIMEOUT_MS`: overrides test timeout
+- `EXPECT_TIMEOUT_MS`: overrides assertion timeout
+
+Examples:
+
+```powershell
+$env:HEADLESS="true"; npm run test:smoke
+$env:BASE_URL="http://localhost:5173"; npm run test:bdd
+```
 
 ## Sample Coverage
 
@@ -62,3 +82,5 @@ Generated artifacts are written under `test-results/` and `playwright-report/`.
 
 - The current training app is frontend-driven and does not expose a real backend auth API yet.
 - `ARCHITECTURE.md` documents the intended direction toward AI-assisted, reuse-first BDD automation with human review.
+- `FRAMEWORK-CONVENTIONS.md` defines the coding and layering rules for framework growth.
+- `docs/ENGINEER-WORKFLOW.md` explains the day-to-day workflow for engineers adding coverage.
